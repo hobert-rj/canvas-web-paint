@@ -1,0 +1,338 @@
+#paintPage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+#paintPage * {
+  text-align: center;
+  box-sizing: content-box;
+}
+
+#paintTabs {
+  margin: 0;
+  list-style-type: none;
+  flex: none;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px 0 0;
+  border-bottom: 1px solid #333c4d;
+  overflow: auto hidden;
+}
+
+#paintTabs::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+#paintTabs::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+#paintTabs::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+#paintTabs::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+#paintTabs::-webkit-scrollbar-thumb:active {
+  background: #b9ffb8;
+}
+#paintTabs::-webkit-scrollbar-track {
+  background: #666666;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+#paintTabs::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+#paintTabs::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+#paintTabs::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+#paintTabsCon {
+  flex: none;
+  display: flex;
+  flex-direction: row-reverse;
+  height: 100%;
+}
+
+#paintTabs li {
+  display: flex;
+  background: #333c4d;
+  height: 100%;
+  border: 1px solid #000;
+  border-radius: 10px 10px 0 0;
+  justify-content: center;
+  align-items: center;
+  padding: 3px 10px;
+  flex: none;
+}
+
+#paintTabs li.active {
+  background: #656e7f;
+}
+
+#paintTabs li label {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  color: #fff;
+}
+
+#paintTabs li svg {
+  fill: #fff;
+  width: 16px;
+  height: 16px;
+}
+
+#paintTabs #paintAdd svg {
+  width: 24px;
+  height: 24px;
+}
+
+#paintDraw {
+  background: white;
+  cursor: crosshair;
+  width: 100%;
+}
+
+#paintButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#paintButtons button,
+#paintSave {
+  background: white;
+  font-weight: bold;
+  transition: 0.1s;
+  flex: 1 0 20px;
+  width: 100%;
+  border-radius: 4px;
+  border: 2px groove #000;
+  cursor: pointer;
+  display: block;
+  color: #000;
+  text-decoration: none;
+  box-sizing: border-box;
+  padding: 4px;
+  font-size: 15px;
+}
+
+#paintButtons button:hover,
+#paintSave:hover {
+  transform: scale(1.07);
+}
+
+#paintButtons #paintReset {
+  background: rgb(255, 41, 41);
+  border-radius: 4px;
+  border-color: red;
+  color: #fff;
+}
+
+#paintSave:active {
+  background: rgb(209, 209, 209);
+}
+
+#paintReset:active {
+  background: rgb(204, 31, 31);
+}
+
+#paintSize {
+  display: block;
+  margin: 7px 0;
+  padding: 15px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#paintContainer {
+  flex: 1;
+  position: relative;
+}
+
+#paintToolBar {
+  width: 260px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  max-width: calc(100% - 50px);
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  background-color: rgb(238, 241, 255);
+  border-radius: 15px;
+  overflow: hidden;
+  padding: 15px;
+}
+
+#paintTools {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
+  align-items: center;
+}
+
+#paintTools span {
+  cursor: pointer;
+  padding: 10px 5px;
+  text-align: left;
+  transition: 0.15s;
+  width: 100%;
+  flex: 1 0 fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  background: #333c4d;
+  --color: #fff;
+  margin: 0;
+  font-size: 15px;
+  color: var(--color);
+}
+
+#paintTools span:hover {
+  background: #222833;
+}
+
+#paintTools span.active-tool {
+  background: #66cc8a;
+  --color: #333c4d;
+}
+
+#paintTools span i {
+  background-color: var(--color);
+  display: block;
+  width: 10px;
+  height: 10px;
+}
+
+#paintTools span[data-name="pencil"] i {
+  border-radius: 0;
+}
+
+#paintTools span[data-name="brush"] i {
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+}
+
+#paintTools span[data-name="eraser"] i {
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+}
+
+#paintColorCon {
+  display: flex;
+}
+
+#paintColors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 2px;
+  gap: 0;
+}
+
+#paintColors span {
+  background: white;
+  cursor: pointer;
+  height: 36px;
+  transition: 0.1s;
+  width: 29px;
+  margin: 1px;
+}
+
+#paintColors span.active-color {
+  transform: scale(1.1);
+  border: 1px solid white;
+  box-sizing: content-box;
+  margin: 0;
+}
+
+#paintPicker {
+  flex: none;
+  width: 50px;
+  color: #fff;
+  background: #333c4d;
+  border-radius: 4px;
+  padding: 0 2px;
+}
+
+#paintPicker label {
+  font-size: 14px;
+  margin: 0;
+}
+
+#paintColorInput {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  height: 50px;
+  padding: 0;
+  width: 100%;
+}
+
+.paintBtn {
+  position: absolute;
+  z-index: 2;
+  background-color: #333c4d;
+  top: 4px;
+  left: 4px;
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  display: block;
+  margin: 0;
+  box-sizing: content-box;
+}
+
+.paintBtn svg {
+  fill: #fff;
+  display: none;
+}
+
+.paintBtn.show .swap-off {
+  display: block;
+}
+
+.paintBtn:not(.show) .swap-on {
+  display: block;
+}
+
+.paintRangeSlider {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.paintRangeSlider input {
+  flex: 1;
+}
+
+.paintRangeSlider #sizeVal {
+  font-size: 16px;
+}
