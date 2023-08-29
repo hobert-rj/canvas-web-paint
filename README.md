@@ -19,7 +19,7 @@ You can try out the canvas-web-paint by visiting [🔗 this link](https://hobert
 ## Installation
 
 1. Fork this repository.
-2. Clone the your fork:
+2. Clone your fork:
 ```bash
 git clone https://github.com/[your-user-name]/canvas-web-paint.git
 ```
