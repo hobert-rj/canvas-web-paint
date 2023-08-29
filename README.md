@@ -1,6 +1,6 @@
-# HR Paint App
+# Intro
 
-HR Paint App is a simple web-based paint application that allows users to create digital drawings and sketches. It provides a variety of tools and color options to facilitate the creative process.
+canvas-web-paint is a simple canvas-based web-based paint application that allows users to create digital drawings and sketches. It provides a variety of tools and color options to facilitate the creative process.
 
 ## Features
 
@@ -14,19 +14,19 @@ HR Paint App is a simple web-based paint application that allows users to create
 
 ## Demo
 
-You can try out the HR Paint App by visiting [🔗 this link](https://hobert-rj.github.io/hr-paint-app/).
+You can try out the canvas-web-paint by visiting [🔗 this link](https://hobert-rj.github.io/canvas-web-paint/).
 
 ## Installation
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/hr-paint-app.git
+git clone https://github.com/hobert-rj/CanvasPaintWeb.git
 ```
 2. Open `index.html` in your web browser to use the paint application.
 3. Integrate it into your app.
 
 ## Developer Guide
-This guide provides an overview of the main functions within the HR Paint App's JavaScript code. Understanding these functions will help you navigate and modify the app's behavior.
+This guide provides an overview of the main functions within the canvas-web-paint's JavaScript code. Understanding these functions will help you navigate and modify the app's behavior.
 
 ### `paintInit()`
 This function initializes the paint application and should be called when the HTML element with the id="paintPage" is rendered. It sets up event listeners, initializes variables, and prepares the canvas for drawing. This function is responsible for the initial setup of the application.
@@ -53,11 +53,11 @@ The paintGetJson function returns the JSON data representing the current state o
 - `paintDeleteTab(id)`: Deletes a specific tab, allowing users to remove canvas views as needed.
 - `paintFindNextId(nextId, condition)`: Finds the next available tab ID based on the given condition.
 
-Understanding these functions will enable you to modify, enhance, or troubleshoot the HR Paint App according to your requirements.
+Understanding these functions will enable you to modify, enhance, or troubleshoot the CanvasPaintWeb according to your requirements.
 
 ## Contributing
 
-Contributions to the HR Paint App are welcome! If you find any issues or have suggestions for improvements, here are some areas you can contribute to:
+Contributions to the CanvasPaintWeb are welcome! If you find any issues or have suggestions for improvements, here are some areas you can contribute to:
 
 - **Debugging and Documentation**: Help identify and fix bugs in the codebase. Additionally, enhance the documentation to make it more comprehensive and user-friendly.
 
