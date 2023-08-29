@@ -18,12 +18,14 @@ You can try out the canvas-web-paint by visiting [🔗 this link](https://hobert
 
 ## Installation
 
-1. Clone the repository:
+1. Fork this repository.
+2. Clone the your fork:
 ```bash
-git clone https://github.com/hobert-rj/canvas-web-paint.git
+git clone https://github.com/[your-user-name]/canvas-web-paint.git
 ```
-2. Open `index.html` in your web browser to use the paint application.
-3. Integrate it into your app.
+###### &emsp; Remember to replace "[your-user-name]" with your actual GitHub username in the clone URL.
+3. Open `index.html` in your web browser to use the paint application.
+4. Integrate it into your app, if you're planning to use this canvas-web-paint app as part of a larger project.
 
 ## Developer Guide
 This guide provides an overview of the main functions within the canvas-web-paint's JavaScript code. Understanding these functions will help you navigate and modify the app's behavior.
@@ -69,7 +71,7 @@ Contributions to the canvas-web-paint are welcome! If you find any issues or hav
 
 - **Initializing `#paintPage` Programmatically**: Implement the ability to initialize the paint application programmatically by providing a function that sets up the paint environment when called.
 
-Feel free to open an issue or submit a pull request with your contributions. Your contributions will play a significant role in the growth and improvement of the HR Paint App.
+Feel free to open an issue or submit a pull request with your contributions. Your contributions will play a significant role in the growth and improvement of the canvas-web-paint.
 
 ## License
 
