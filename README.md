@@ -20,7 +20,7 @@ You can try out the canvas-web-paint by visiting [🔗 this link](https://hobert
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/hobert-rj/CanvasPaintWeb.git
+git clone https://github.com/hobert-rj/canvas-web-paint.git
 ```
 2. Open `index.html` in your web browser to use the paint application.
 3. Integrate it into your app.
@@ -53,11 +53,11 @@ The paintGetJson function returns the JSON data representing the current state o
 - `paintDeleteTab(id)`: Deletes a specific tab, allowing users to remove canvas views as needed.
 - `paintFindNextId(nextId, condition)`: Finds the next available tab ID based on the given condition.
 
-Understanding these functions will enable you to modify, enhance, or troubleshoot the CanvasPaintWeb according to your requirements.
+Understanding these functions will enable you to modify, enhance, or troubleshoot the canvas-web-paint according to your requirements.
 
 ## Contributing
 
-Contributions to the CanvasPaintWeb are welcome! If you find any issues or have suggestions for improvements, here are some areas you can contribute to:
+Contributions to the canvas-web-paint are welcome! If you find any issues or have suggestions for improvements, here are some areas you can contribute to:
 
 - **Debugging and Documentation**: Help identify and fix bugs in the codebase. Additionally, enhance the documentation to make it more comprehensive and user-friendly.
 
