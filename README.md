@@ -1,4 +1,4 @@
-# Intro
+# canvas-web-paint intro
 
 canvas-web-paint is a simple canvas-based web-based paint application that allows users to create digital drawings and sketches. It provides a variety of tools and color options to facilitate the creative process.
 
