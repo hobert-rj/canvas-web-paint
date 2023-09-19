@@ -250,7 +250,7 @@ function paintGetDataUrl() {
 }
 
 function paintNewTab() {
-    const newId = ++paintTabsCreated;
+    const newId = `Image ${++paintTabsCreated}`;
 
     paintCreateTab(newId).classList.add('active');
 
@@ -266,7 +266,7 @@ function paintCreateTab(newId) {
     const newNode = document.createElement('li');
     newNode.classList.add('paintTab');
     newNode.dataset.id = newId;
-    newNode.innerHTML = `<label>Image ${newId}</label><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 512 512'><polygon points='400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49'></polygon></svg>`;
+    newNode.innerHTML = `<label>${newId}</label><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 512 512'><polygon points='400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49'></polygon></svg>`;
     paintTabsCon.append(newNode)
     newNode.addEventListener('click', paintSelectTab);
     return newNode;
@@ -274,7 +274,7 @@ function paintCreateTab(newId) {
 
 async function paintSelectTab(e, id) {
     if (id === undefined)
-        id = parseInt(this.dataset.id);
+        id = this.dataset.id;
 
     if (e) {
         const target = e.target || e.srcElement;
@@ -288,18 +288,20 @@ async function paintSelectTab(e, id) {
     if (paintSelectedId === id) return
 
     paintData[paintSelectedId].context = paintGetDataUrl();
+    console.log(id)
     paintSelectedId = id;
     await paintUpdateTabsContext();
 }
 
 async function paintUpdateTabsContext() {
     for (const item of paintTabs) {
-        if (parseInt(item.dataset.id) === paintSelectedId)
+        if (item.dataset.id === paintSelectedId)
             item.classList.add('active')
         else
             item.classList.remove('active')
     }
     paintClearTab();
+    console.log(paintData, paintSelectedId)
     if (paintData[paintSelectedId].context || !paintData[paintSelectedId].image) {
         await paintSetDataUrl(paintData[paintSelectedId].context);
     } else if (paintData[paintSelectedId].image) {
@@ -334,7 +336,7 @@ function paintDeleteTab(id) {
     }
 
     for (const item of paintTabs) {
-        if (parseInt(item.dataset.id) === id) {
+        if (item.dataset.id === id) {
             item.remove();
             break
         }
@@ -348,7 +350,7 @@ function paintDeleteTab(id) {
 function paintFindNextId(nextId, condition = (newId) => true) {
     if (!paintData[nextId]) {
         for (const key of Object.keys(paintData)) {
-            const newId = parseInt(key);
+            const newId = key;
             if (condition(newId)) {
                 nextId = newId;
                 break;
@@ -381,3 +383,24 @@ async function paintSetJson(json, startingId = 1) {
 
 // start
 paintInit();
+
+// example
+setTimeout(() => {
+    console.log(1)
+    const temp = {
+        'hello': {
+            editable: false,
+            image: 'https://png.pngtree.com/png-clipart/20190918/ourmid/pngtree-pink-watercolor-brushes-171474-png-image_1733978.jpg'
+        }
+    };
+
+    setTimeout(async () => {
+        console.log(2)
+        await paintSetJson(JSON.stringify(temp))
+        const temp2 = paintGetJson();
+        setTimeout(() => {
+            console.log(3)
+            paintSetJson(temp2)
+        }, 3000)
+    }, 3000)
+}, 3000)
