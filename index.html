@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="styles.css" class="css">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <link class="css" href="styles.css" rel="stylesheet">
     <title>HR Paint App</title>
 </head>
 
@@ -13,35 +13,35 @@
 <div style="position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px; overflow: hidden;">
 
     <div id="paintPage">
-        <ul id="paintTabs">
-      <span id="paintTabsCon">
-        <li class="paintTab active" data-id="1">
-          <label>
-            Image 1
-          </label>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
-            <polygon
-                    points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49">
-            </polygon>
-          </svg>
-        </li>
-      </span>
-            <li id="paintAdd">
+        <div id="paintTabs">
+            <ul id="paintTabsCon">
+                <li class="paintTabBase paintTab active" data-id="1">
+                    <label>
+                        Image 1
+                    </label>
+                    <svg height="24" viewBox="0 0 512 512" width="24" xmlns="http://www.w3.org/2000/svg">
+                        <polygon
+                                points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49">
+                        </polygon>
+                    </svg>
+                </li>
+            </ul>
+            <div id="paintAdd" class="paintTabBase">
                 <a>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                    <svg height="16" viewBox="0 0 16 16" width="16" xmlns="http://www.w3.org/2000/svg">
                         <path
                                 d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                     </svg>
                 </a>
-            </li>
-        </ul>
+            </div>
+        </div>
         <div id="paintContainer">
 
-            <label id="paintBtn" class="paintBtn show">
-                <svg class="swap-on" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+            <label class="paintBtn show" id="paintBtn">
+                <svg class="swap-on" height="24" viewBox="0 0 512 512" width="24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"></path>
                 </svg>
-                <svg class="swap-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                <svg class="swap-off" height="24" viewBox="0 0 512 512" width="24" xmlns="http://www.w3.org/2000/svg">
                     <polygon
                             points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49">
                     </polygon>
@@ -54,9 +54,9 @@
                     <span data-name="eraser"><i></i> Eraser</span>
                 </div>
                 <div id="paintSize">
-                    Size
+                    <label for="paintSizeRange">Size</label>
                     <div class="paintRangeSlider">
-                        <input type="range" min="1" max="500" value="15" id="paintSizeRange">
+                        <input id="paintSizeRange" max="500" min="1" type="range" value="15">
                         <div id="paintSizeVal">15</div>
                     </div>
                 </div>
@@ -76,13 +76,13 @@
                         <span data-color="gray" style="background-color: gray;"></span>
                     </div>
                     <div id="paintPicker">
-                        <label>Pick Color</label>
-                        <input type="color" id="paintColorInput" value="#cce6ff"></input>
+                        <label for="paintColorInput">Pick Color</label>
+                        <input id="paintColorInput" type="color" value="#cce6ff">
                     </div>
                 </div>
                 <div id="paintButtons">
                     <button id="paintReset">Clear</button>
-                    <a id="paintSave" href="" download="" target="_blank">Save</a>
+                    <a download="" href="" id="paintSave" target="_blank">Save</a>
                 </div>
             </div>
 
