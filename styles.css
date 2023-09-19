@@ -1,6 +1,6 @@
 #paintPage {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -24,6 +24,7 @@
   padding: 10px 0 0;
   border-bottom: 1px solid #333c4d;
   overflow: auto hidden;
+  height: 35px;
 }
 
 #paintTabs::-webkit-scrollbar {
@@ -168,6 +169,8 @@
 #paintContainer {
   flex: 1;
   position: relative;
+  min-height: 0;
+  min-width: 0;
 }
 
 #paintToolBar {

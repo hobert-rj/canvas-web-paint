@@ -2,16 +2,18 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="styles.css" class="css">
-  <title>HR Paint App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="styles.css" class="css">
+    <title>HR Paint App</title>
 </head>
 
 <body>
-  <div id="paintPage">
-    <ul id="paintTabs">
+<div style="position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px; overflow: hidden;">
+
+    <div id="paintPage">
+        <ul id="paintTabs">
       <span id="paintTabsCon">
         <li class="paintTab active" data-id="1">
           <label>
@@ -19,78 +21,81 @@
           </label>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
             <polygon
-              points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49">
+                    points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49">
             </polygon>
           </svg>
         </li>
       </span>
-      <li id="paintAdd">
-        <a>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
-            <path
-              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-          </svg>
-        </a>
-      </li>
-    </ul>
-    <div id="paintContainer">
+            <li id="paintAdd">
+                <a>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                        <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+        <div id="paintContainer">
 
-      <label id="paintBtn" class="paintBtn show">
-        <svg class="swap-on" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
-          <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"></path>
-        </svg>
-        <svg class="swap-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
-          <polygon
-            points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49">
-          </polygon>
-        </svg>
-      </label>
-      <div id="paintToolBar">
-        <div id="paintTools">
-          <span data-name="pencil"><i></i> Pencil</span>
-          <span class="active-tool" data-name="brush"><i></i> Pen</span>
-          <span data-name="eraser"><i></i> Eraser</span>
-        </div>
-        <div id="paintSize">
-          Size
-          <div class="paintRangeSlider">
-            <input type="range" min="1" max="500" value="15" id="paintSizeRange">
-            <div id="paintSizeVal">15</div>
-          </div>
-        </div>
-        <div id="paintColorCon">
-          <div id="paintColors">
-            <span class="active-color" data-color="black" style="background-color: black;"></span>
-            <span data-color="white" style="background-color: white;"></span>
-            <span data-color="red" style="background-color: red;"></span>
-            <span data-color="orange" style="background-color: orange;"></span>
-            <span data-color="yellow" style="background-color: yellow;"></span>
-            <span data-color="green" style="background-color: green;"></span>
-            <span data-color="blue" style="background-color: blue;"></span>
-            <span data-color="purple" style="background-color: purple;"></span>
-            <span data-color="gold" style="background-color: gold;"></span>
-            <span data-color="violet" style="background-color: violet;"></span>
-            <span data-color="silver" style="background-color: silver;"></span>
-            <span data-color="gray" style="background-color: gray;"></span>
-          </div>
-          <div id="paintPicker">
-            <label>Pick Color</label>
-            <input type="color" id="paintColorInput" value="#cce6ff"></input>
-          </div>
-        </div>
-        <div id="paintButtons">
-          <button id="paintReset">Clear</button>
-          <a id="paintSave" href="" download="" target="_blank">Save</a>
-        </div>
-      </div>
+            <label id="paintBtn" class="paintBtn show">
+                <svg class="swap-on" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                    <path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"></path>
+                </svg>
+                <svg class="swap-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                    <polygon
+                            points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49">
+                    </polygon>
+                </svg>
+            </label>
+            <div id="paintToolBar">
+                <div id="paintTools">
+                    <span data-name="pencil"><i></i> Pencil</span>
+                    <span class="active-tool" data-name="brush"><i></i> Pen</span>
+                    <span data-name="eraser"><i></i> Eraser</span>
+                </div>
+                <div id="paintSize">
+                    Size
+                    <div class="paintRangeSlider">
+                        <input type="range" min="1" max="500" value="15" id="paintSizeRange">
+                        <div id="paintSizeVal">15</div>
+                    </div>
+                </div>
+                <div id="paintColorCon">
+                    <div id="paintColors">
+                        <span class="active-color" data-color="black" style="background-color: black;"></span>
+                        <span data-color="white" style="background-color: white;"></span>
+                        <span data-color="red" style="background-color: red;"></span>
+                        <span data-color="orange" style="background-color: orange;"></span>
+                        <span data-color="yellow" style="background-color: yellow;"></span>
+                        <span data-color="green" style="background-color: green;"></span>
+                        <span data-color="blue" style="background-color: blue;"></span>
+                        <span data-color="purple" style="background-color: purple;"></span>
+                        <span data-color="gold" style="background-color: gold;"></span>
+                        <span data-color="violet" style="background-color: violet;"></span>
+                        <span data-color="silver" style="background-color: silver;"></span>
+                        <span data-color="gray" style="background-color: gray;"></span>
+                    </div>
+                    <div id="paintPicker">
+                        <label>Pick Color</label>
+                        <input type="color" id="paintColorInput" value="#cce6ff"></input>
+                    </div>
+                </div>
+                <div id="paintButtons">
+                    <button id="paintReset">Clear</button>
+                    <a id="paintSave" href="" download="" target="_blank">Save</a>
+                </div>
+            </div>
 
-      <div>
-        <canvas id="paintDraw"></canvas>
-      </div>
+            <div>
+                <canvas id="paintDraw"></canvas>
+            </div>
 
+        </div>
     </div>
-  </div>
-  <script src="script.js"></script>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 
 </html>
