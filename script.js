@@ -1,50 +1,3 @@
-const paintBrushRange = document.querySelector('#paintSizeRange'),
-    paintSizeVal = document.querySelector('#paintSizeVal'),
-    paintContainer = document.querySelector('#paintContainer'),
-    paintAdd = document.querySelector('#paintAdd'),
-    paintCanvas = document.querySelector('#paintDraw'),
-    paintColorInput = document.querySelector('#paintColorInput'),
-    paintResetBtn = document.querySelector('#paintReset'),
-    paintSaveBtn = document.querySelector('#paintSave'),
-    paintBtn = document.querySelector('#paintBtn'),
-    paintToolBar = document.querySelector('#paintToolBar'),
-    paintTabsCon = document.querySelector('#paintTabsCon'),
-    paintColorCon = document.querySelector('#paintColorCon'),
-    paintTools = document.querySelectorAll('#paintTools span'),
-    paintColors = document.querySelectorAll('#paintColors span');
-
-const paintQuality = 2,
-    paintFrequency = 1,
-    paintMinMovement = 5,
-    paintBackground = 'white',
-    paintCtx = paintCanvas.getContext('2d'),
-    paintCalcQuality = (val) => val * paintQuality,
-    paintNotMove = (x, y) => {
-        const x2 = Math.abs(paintLastX - x),
-            y2 = Math.abs(paintLastY - y);
-        return x2 * x2 + y2 * y2 < paintMinMovement;
-    },
-    getPaintTabs = () => document.querySelectorAll('.paintTab');
-
-let paintData = {},
-    paintBrushSize = {
-        pencil: 15,
-        eraser: 100,
-        brush: 15,
-    },
-    paintCurrentColor = 'black',
-    paintCurrentLineCap = 'round',
-    paintCurrentTool = 'brush',
-    paintDrawing = false,
-    paintLastX = 0,
-    paintLastY = 0,
-    paintRect = '',
-    paintInitialDataUrl,
-    paintSelectedId = 1,
-    paintCycles = paintFrequency,
-    paintTabs = getPaintTabs(),
-    paintTabsCreated = 1;
-
 class paintDataItem {
     editable = true;
     context = '';
@@ -59,6 +12,91 @@ class paintDataItem {
         }
     }
 }
+
+class Subscription {
+    constructor(listeners) {
+        this.listeners = listeners;
+    }
+
+    subscribe(listener) {
+        this.listeners.push(listener);
+    }
+
+    unsubscribe(listener) {
+        const index = this.listeners.indexOf(listener);
+        if (index !== -1) {
+            this.listeners.splice(index, 1);
+        }
+    }
+}
+
+class EventEmitter {
+    data
+
+    constructor() {
+        this.listeners = [];
+        this.subscription = new Subscription(this.listeners);
+    }
+
+    emit(data, detectChange = true) {
+        if (data !== undefined && this.data !== data || !detectChange) {
+            this.data = data;
+            this.listeners.forEach((listener) => {
+                listener(data);
+            });
+        }
+    }
+}
+
+const paintBrushRange = document.querySelector('#paintSizeRange');
+const paintSizeVal = document.querySelector('#paintSizeVal');
+const paintContainer = document.querySelector('#paintContainer');
+const paintAdd = document.querySelector('#paintAdd');
+const paintCanvas = document.querySelector('#paintDraw');
+const paintColorInput = document.querySelector('#paintColorInput');
+const paintResetBtn = document.querySelector('#paintReset');
+const paintSaveBtn = document.querySelector('#paintSave');
+const paintBtn = document.querySelector('#paintBtn');
+const paintToolBar = document.querySelector('#paintToolBar');
+const paintTabsCon = document.querySelector('#paintTabsCon');
+const paintColorCon = document.querySelector('#paintColorCon');
+const paintTools = document.querySelectorAll('#paintTools span');
+const paintColors = document.querySelectorAll('#paintColors span');
+
+const paintQuality = 2;
+const paintFrequency = 1;
+const paintMinMovement = 5;
+const paintBackground = 'white';
+const paintCtx = paintCanvas.getContext('2d');
+const paintCalcQuality = (val) => val * paintQuality;
+const paintNotMove = (x, y) => {
+    const x2 = Math.abs(paintLastX - x);
+    const y2 = Math.abs(paintLastY - y);
+    return x2 * x2 + y2 * y2 < paintMinMovement;
+};
+const getPaintTabs = () => document.querySelectorAll('.paintTab');
+
+const paintEditChangeEventMaster = new EventEmitter();
+const paintEditChangeEvent = paintEditChangeEventMaster.subscription;
+
+let paintData = {};
+let paintBrushSize = {
+    pencil: 15,
+    eraser: 100,
+    brush: 15,
+};
+let paintCurrentColor = 'black';
+let paintCurrentLineCap = 'round';
+let paintCurrentTool = 'brush';
+let paintDrawing = false;
+let paintLastX = 0;
+let paintLastY = 0;
+let paintRect = '';
+let paintInitialDataUrl;
+let paintSelectedId = 1;
+let paintCycles = paintFrequency;
+let paintTabs = getPaintTabs();
+let paintTabsCreated = 1;
 
 // Run once at first
 function paintInit() {
@@ -119,7 +157,9 @@ function paintReSize() {
 
 function paintContinueDraw(e) {
     e.preventDefault();
-    if (!paintDrawing) return;
+    if (!paintDrawing || paintData[paintSelectedId].editable === false) {
+        return;
+    }
 
     if (paintCycles < paintFrequency) {
         paintCycles++;
@@ -144,6 +184,9 @@ function paintContinueDraw(e) {
 
 function paintStartDraw(e) {
     e.preventDefault();
+    if (paintData[paintSelectedId].editable === false) {
+        return;
+    }
     const target = e.target || e.srcElement;
     paintRect = target.getBoundingClientRect();
     paintDrawing = true;
@@ -255,11 +298,11 @@ function paintNewTab() {
     paintCreateTab(newId).classList.add('active');
 
     paintData[paintSelectedId].context = paintGetDataUrl();
-    paintData[newId] = new paintDataItem();
+    paintData[newId] = new paintDataItem(paintInitialDataUrl);
     paintSelectedId = newId;
     paintTabs.forEach((tab) => tab.classList.remove('active'));
-    paintSetDataUrl(paintInitialDataUrl);
     paintTabs = getPaintTabs();
+    paintUpdateTabsContext();
 }
 
 function paintCreateTab(newId) {
@@ -288,7 +331,6 @@ async function paintSelectTab(e, id) {
     if (paintSelectedId === id) return
 
     paintData[paintSelectedId].context = paintGetDataUrl();
-    console.log(id)
     paintSelectedId = id;
     await paintUpdateTabsContext();
 }
@@ -301,11 +343,20 @@ async function paintUpdateTabsContext() {
             item.classList.remove('active')
     }
     paintClearTab();
-    console.log(paintData, paintSelectedId)
-    if (paintData[paintSelectedId].context || !paintData[paintSelectedId].image) {
-        await paintSetDataUrl(paintData[paintSelectedId].context);
-    } else if (paintData[paintSelectedId].image) {
-        await paintSetImage(paintData[paintSelectedId].image);
+    const selectedPaintData = paintData[paintSelectedId];
+    const editable = selectedPaintData.editable !== false;
+    if (editable) {
+        paintToolBar.style.display = '';
+        paintBtn.style.display = '';
+    } else {
+        paintToolBar.style.display = 'none';
+        paintBtn.style.display = 'none';
+    }
+    paintEditChangeEventMaster.emit(editable);
+    if (selectedPaintData.context || !selectedPaintData.image) {
+        await paintSetDataUrl(selectedPaintData.context);
+    } else if (selectedPaintData.image) {
+        await paintSetImage(selectedPaintData.image);
     }
 }
 
@@ -387,7 +438,8 @@ paintInit();
 // example
 setTimeout(() => {
     console.log(1)
-    const temp = {
+    // custom tabs
+    const tabs = {
         'hello': {
             editable: false,
             image: 'https://png.pngtree.com/png-clipart/20190918/ourmid/pngtree-pink-watercolor-brushes-171474-png-image_1733978.jpg'
@@ -396,11 +448,23 @@ setTimeout(() => {
 
     setTimeout(async () => {
         console.log(2)
-        await paintSetJson(JSON.stringify(temp))
-        const temp2 = paintGetJson();
+        // set custom tabs
+        await paintSetJson(JSON.stringify(tabs))
+        // save tabs info
+        const tabs2 = paintGetJson();
         setTimeout(() => {
             console.log(3)
-            paintSetJson(temp2)
+            // set saved tabs info
+            paintSetJson(tabs2)
         }, 3000)
     }, 3000)
 }, 3000)
+
+// events example
+const onPaintEditChange = (editable) => {
+    console.log(`Paint edit changed. Editable: ${editable}`);
+    // unsubscribe example
+    paintEditChangeEvent.unsubscribe(onPaintEditChange);
+}
+// subscribe example
+paintEditChangeEvent.subscribe(onPaintEditChange);
