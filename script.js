@@ -247,6 +247,10 @@ function paintSelectTab(e, id) {
 
   paintData[paintSelectedId] = paintGetDataUrl();
   paintSelectedId = id;
+  paintUpdateTabsContext();
+}
+
+function paintUpdateTabsContext() {
   for (const item of paintTabs) {
     if (parseInt(item.dataset.id) === paintSelectedId)
       item.classList.add('active')
@@ -315,16 +319,17 @@ function paintGetJson() {
 }
 
 // Set Json data to paint
-function paintSetJson(arr, startingId = 1) {
-  const temp = JSON.parse(arr);
+function paintSetJson(json, startingId = 1) {
+  const temp = JSON.parse(json);
   if (temp) {
     paintData = temp;
     paintTabsCon.textContent = '';
-    for (key in paintData) {
+    for (const key in paintData) {
       paintCreateTab(key);
     }
     paintTabs = getPaintTabs();
-    paintSelectTab(undefined, paintFindNextId(startingId));
+    paintSelectedId = paintFindNextId(startingId);
+    paintUpdateTabsContext();
   }
 }
 
