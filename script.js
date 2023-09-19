@@ -436,35 +436,35 @@ async function paintSetJson(json, startingId = 1) {
 paintInit();
 
 // example
-setTimeout(() => {
-    console.log(1)
-    // custom tabs
-    const tabs = {
-        'hello': {
-            editable: false,
-            image: 'https://png.pngtree.com/png-clipart/20190918/ourmid/pngtree-pink-watercolor-brushes-171474-png-image_1733978.jpg'
-        }
-    };
-
-    setTimeout(async () => {
-        console.log(2)
-        // set custom tabs
-        await paintSetJson(JSON.stringify(tabs))
-        // save tabs info
-        const tabs2 = paintGetJson();
-        setTimeout(() => {
-            console.log(3)
-            // set saved tabs info
-            paintSetJson(tabs2)
-        }, 3000)
-    }, 3000)
-}, 3000)
+// setTimeout(() => {
+//     console.log(1)
+//     // custom tabs
+//     const tabs = {
+//         'hello': {
+//             editable: false,
+//             image: 'https://png.pngtree.com/png-clipart/20190918/ourmid/pngtree-pink-watercolor-brushes-171474-png-image_1733978.jpg'
+//         }
+//     };
+//
+//     setTimeout(async () => {
+//         console.log(2)
+//         // set custom tabs
+//         await paintSetJson(JSON.stringify(tabs))
+//         // save tabs info
+//         const tabs2 = paintGetJson();
+//         setTimeout(() => {
+//             console.log(3)
+//             // set saved tabs info
+//             paintSetJson(tabs2)
+//         }, 3000)
+//     }, 3000)
+// }, 3000)
 
 // events example
-const onPaintEditChange = (editable) => {
-    console.log(`Paint edit changed. Editable: ${editable}`);
-    // unsubscribe example
-    paintEditChangeEvent.unsubscribe(onPaintEditChange);
-}
-// subscribe example
-paintEditChangeEvent.subscribe(onPaintEditChange);
+// const onPaintEditChange = (editable) => {
+//     console.log(`Paint edit changed. Editable: ${editable}`);
+//     // unsubscribe example
+//     paintEditChangeEvent.unsubscribe(onPaintEditChange);
+// }
+// // subscribe example
+// paintEditChangeEvent.subscribe(onPaintEditChange);
